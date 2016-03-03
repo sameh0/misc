@@ -67,7 +67,7 @@ atom-text-editor.is-focused .line-number.cursor-line-no-selection, atom-text-edi
   background-color: #282A2E;
 }
 atom-text-editor::shadow .lines .line.cursor-line {
-  background-color: rgba(89, 89, 89, 0.45);
+  background-color: rgba(89, 89, 89, 0.1);
 }
 .bracket-matcher .region {
 
@@ -76,6 +76,7 @@ atom-text-editor::shadow .lines .line.cursor-line {
     //background-color: #969FA2!important;
     opacity: 0.6;
 }
+
 
 .comment {
   color: @Grey-Main;
@@ -103,7 +104,7 @@ atom-text-editor::shadow .lines .line.cursor-line {
     color: @yellow;
   }
   &.operator.logic.css{
-    color:@Brick;
+    color:@CSS;//@CSS;
   }
   &.other.important.css{
     color:@Violet-main;
@@ -152,8 +153,11 @@ atom-text-editor::shadow .lines .line.cursor-line {
 }
 
 .invalid.illegal {
-  background-color: @White-main;
-  color: @syntax-background-color;
+//  background-color: @White-main;
+  //color: @syntax-background-color;
+}
+invalid.illegal.string.js{
+color: @Orange-Main;
 }
 
 .string {
@@ -205,6 +209,9 @@ atom-text-editor::shadow .lines .line.cursor-line {
     &.js{
       color:@White-main;
     }
+    &.js.comment{
+      color:@Grey-Main !important;
+    }
     &.string{
     color:@Orange-Main;
     }
@@ -223,10 +230,10 @@ atom-text-editor::shadow .lines .line.cursor-line {
     color: @White-main;
   }
   &.type.property-name.css{
-    color:@Brick;
+    color:@Blue-2;//css;
   }
   &.function  {
-    color: @Violet-main;
+     color: @Violet-main;
 
     &.any-method {
       color: @Violet-main;
@@ -239,10 +246,10 @@ atom-text-editor::shadow .lines .line.cursor-line {
 
 .entity {
   &.other.attribute-name.css{
-  color:@Blue-main;
+  color:@CSS;
   }
-  &.name {
-   //color: @Violet-main;
+  &.name.css {
+  // color: @Brick;
   }
 &.function.php {
   color: @Brick !important;
@@ -259,8 +266,12 @@ atom-text-editor::shadow .lines .line.cursor-line {
     color: @Blue-main;
     // text-decoration: underline;
   }
+  &.name.tag.css {
+    color: @CSS;
+    // text-decoration: underline;
+  }
   &.other.attribute.css{
-    color:@Blue-main
+    color:@CSS;
   }
 
   &.other.attribute-name.html {
@@ -315,6 +326,9 @@ atom-text-editor::shadow .lines .line.cursor-line {
   color: @Brick ;
 }
 &.brace.js{
+  color:@White-main;
+}
+&.embedded.line.php{
   color:@White-main;
 }
 }
