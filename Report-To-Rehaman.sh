@@ -67,6 +67,5 @@ ls -l /System/Library/Extensions/AppleHDA.kext/Contents/Resources/*.zml* >> ~/De
 echo "kextcache"
 touch /System/Library/Extensions && sudo kextcache -u / >> ~/Desktop/Problem_Reporting/TerminalOutput
 
-rm ~/Desktop/Problem_Reporting/ProblemReporting.zip
- zip -r ProblemReporting.zip ~/Desktop/Problem_Reporting
+ 
 exit $code
