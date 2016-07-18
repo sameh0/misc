@@ -49,21 +49,33 @@ if [ ! "$EFIMountPoint" ]; then
 fi
 echo $EFIMountPoint
 #Added By Mo7a 1995 To make 75% of Problem Reporting easy .
+
+#Create Problem reporting directory 
 rm -Rf  ~/Desktop/Problem_Reporting
 mkdir ~/Desktop/Problem_Reporting
-cp -r /Volumes/EFI/EFI/Clover/* ~/Desktop/Problem_Reporting
-rm -r ~/Desktop/Problem_Reporting/themes
+
+#Copy EFI/Clover 
+rm -Rf  ~/Desktop/Problem_Reporting/Clover
+cp -r /Volumes/EFI/EFI/Clover ~/Desktop/Problem_Reporting
+rm -r ~/Desktop/Problem_Reporting/Clover/themes
+
+#Patchmatic
 mkdir ~/Desktop/Problem_Reporting/PatchMatic
 cd ~/Desktop/Problem_Reporting/PatchMatic 
  patchmatic -extract 
 
+#Kextstat
 echo "kextstat" >> ~/Desktop/Problem_Reporting/TerminalOutput
 kextstat|grep -y acpiplat >> ~/Desktop/Problem_Reporting/TerminalOutput
 kextstat|grep -y appleintelcpu >> ~/Desktop/Problem_Reporting/TerminalOutput
 kextstat|grep -y applelpc >> ~/Desktop/Problem_Reporting/TerminalOutput
 kextstat|grep -y applehda >> ~/Desktop/Problem_Reporting/TerminalOutput
+
+#Apple HDA
 echo "APPLE HDA"
 ls -l /System/Library/Extensions/AppleHDA.kext/Contents/Resources/*.zml* >> ~/Desktop/Problem_Reporting/TerminalOutput
+
+#KextCache output 
 echo "kextcache"
 touch /System/Library/Extensions && sudo kextcache -u / >> ~/Desktop/Problem_Reporting/TerminalOutput
 
