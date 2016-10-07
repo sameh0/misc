@@ -47,37 +47,42 @@ if [ ! "$EFIMountPoint" ]; then
     mount -t msdos /dev/$EFIDevice "$EFIMountPoint" >/dev/null 2>&1
     code=$?
 fi
-echo $EFIMountPoint
+echo "Collecting Files...."
+#echo $EFIMountPoint
 #Added By Mo7a 1995 To make 75% of Problem Reporting easy .
 
-#Create Problem reporting directory 
+#Create Problem reporting directory
 rm -Rf  ~/Desktop/Problem_Reporting
 mkdir ~/Desktop/Problem_Reporting
 
-#Copy EFI/Clover 
+#Copy EFI/Clover
 rm -Rf  ~/Desktop/Problem_Reporting/Clover
 cp -r /Volumes/EFI/EFI/Clover ~/Desktop/Problem_Reporting
 rm -r ~/Desktop/Problem_Reporting/Clover/themes
 
 #Patchmatic
-mkdir ~/Desktop/Problem_Reporting/PatchMatic
-cd ~/Desktop/Problem_Reporting/PatchMatic 
- patchmatic -extract 
+if [ ! -f /usr/bin/patchmatic ]; then
+    echo "Patchmatic is not found ...if you need it in your problem reporting please install it "
+  else
+    mkdir ~/Desktop/Problem_Reporting/PatchMatic
+    cd ~/Desktop/Problem_Reporting/PatchMatic
+    patchmatic -extract
+fi
 
 #Kextstat
-echo "kextstat" >> ~/Desktop/Problem_Reporting/TerminalOutput
+echo "--Kextstat--" >> ~/Desktop/Problem_Reporting/TerminalOutput
 kextstat|grep -y acpiplat >> ~/Desktop/Problem_Reporting/TerminalOutput
 kextstat|grep -y appleintelcpu >> ~/Desktop/Problem_Reporting/TerminalOutput
 kextstat|grep -y applelpc >> ~/Desktop/Problem_Reporting/TerminalOutput
 kextstat|grep -y applehda >> ~/Desktop/Problem_Reporting/TerminalOutput
 
 #Apple HDA
-echo "APPLE HDA"
+echo "--AppleHDA--" >> ~/Desktop/Problem_Reporting/TerminalOutput
 ls -l /System/Library/Extensions/AppleHDA.kext/Contents/Resources/*.zml* >> ~/Desktop/Problem_Reporting/TerminalOutput
 
-#KextCache output 
-echo "kextcache"
-touch /System/Library/Extensions && sudo kextcache -u / >> ~/Desktop/Problem_Reporting/TerminalOutput
+#KextCache output
+echo "--kextcache--" >> ~/Desktop/Problem_Reporting/TerminalOutput
+sudo touch /System/Library/Extensions &&  kextcache -u / >> ~/Desktop/Problem_Reporting/TerminalOutput 2>&1
 
- 
+echo "Done"
 exit $code
